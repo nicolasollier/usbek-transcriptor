@@ -1,6 +1,8 @@
-import Droppable from './components/Droppable/Droppable'
-import './App.css'
-import styled from 'styled-components'
+import Droppable from "./components/Droppable/Droppable";
+import "./App.css";
+import styled from "styled-components";
+
+import { getCompletion } from "./api/api";
 
 function App() {
   const SubmitButton = styled.button`
@@ -18,9 +20,15 @@ function App() {
     <>
       <h1>Transcriptor</h1>
       <Droppable />
-      <SubmitButton>Transcrire</SubmitButton>
+      <SubmitButton
+        onClick={() => {
+          getCompletion();
+        }}
+      >
+        Transcrire
+      </SubmitButton>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
