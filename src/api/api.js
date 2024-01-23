@@ -1,11 +1,15 @@
 import openAI from "./config";
 
-export const getCompletion = async (prompt) => {
-  const response = await openAI.post("/completions", {
-    prompt,
-    temperature: 0.9,
-  });
+export const getTranscription = async (audio_file) => {
+  try {
+    const response = await openAI.post("/audio/transcriptions", {
+      file: audio_file,
+      model: "whisper-1",
+    });
 
-  console.log(response.data.choices[0].text);
-  return response.data.choices[0].text;
+    return response.data.choices[0].text;
+  } catch (error) {
+    console.error("Error in getTranscription:", error);
+    throw error;
+  }
 };

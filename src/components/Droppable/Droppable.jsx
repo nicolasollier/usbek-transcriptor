@@ -1,5 +1,6 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import styled from "styled-components";
+import { FileContext } from "../../contexts/FileContext";
 
 const DropZone = styled.div`
   border: 1px dashed #ccc;
@@ -44,8 +45,8 @@ const DeleteButton = styled.button`
 
 const Droppable = () => {
   const [dragOver, setDragOver] = useState(false);
-  const [file, setFile] = useState(null);
   const fileInputRef = useRef(null);
+  const { file, setFile } = useContext(FileContext);
 
   const handleDragEnter = (e) => {
     e.preventDefault();

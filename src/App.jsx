@@ -1,10 +1,19 @@
+import { useContext } from "react";
 import Droppable from "./components/Droppable/Droppable";
-import "./App.css";
 import styled from "styled-components";
-
-import { getCompletion } from "./api/api";
+import { getTranscription } from "./api/api";
+import { FileContext } from "./contexts/FileContext";
 
 function App() {
+  const Card = styled.div`
+    text-align: center;
+    background-color: white;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  `;
+
   const SubmitButton = styled.button`
     width: 100%;
     padding: 20px;
@@ -16,18 +25,20 @@ function App() {
     cursor: pointer;
   `;
 
+  const { file } = useContext(FileContext);
+
   return (
-    <>
-      <h1>Transcriptor</h1>
+    <Card>
+      <h2>Transcrire mon audio</h2>
       <Droppable />
       <SubmitButton
         onClick={() => {
-          getCompletion();
+          getTranscription(file);
         }}
       >
         Transcrire
       </SubmitButton>
-    </>
+    </Card>
   );
 }
 
